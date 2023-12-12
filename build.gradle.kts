@@ -15,6 +15,7 @@ repositories {
 dependencies {
     implementation("com.github.jkcclemens:khttp:0.1.0")
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.0")
+    implementation("com.github.aballano:mnemonik:2.1.1")
 }
 
 tasks.withType<KotlinCompile> {
