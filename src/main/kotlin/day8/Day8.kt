@@ -1,5 +1,6 @@
 package day8
 
+import lcm
 import getInput
 
 fun main() {
@@ -22,7 +23,7 @@ private fun day8part2(lines: List<String>) {
     val steps = positions.map {
         stepsToEnd(graph, instructions, it) { endsWith('Z') }
     }
-    println(steps.map { it.toBigInteger() }.reduce { a, b -> a * b / a.gcd(b) })
+    println(steps.lcm())
 }
 
 private inline fun stepsToEnd(

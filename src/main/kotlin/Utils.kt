@@ -21,3 +21,5 @@ fun <T> List<T>.split(separator: T): List<List<T>> {
     }
     return result
 }
+
+fun Iterable<Number>.lcm() = map { it.toLong().toBigInteger() }.reduce { a, b -> a * b / a.gcd(b) }
