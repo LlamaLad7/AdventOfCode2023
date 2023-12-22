@@ -4,7 +4,7 @@ import java.awt.Desktop
 import java.io.File
 import java.net.URI
 
-private const val DAY = 20
+private const val DAY = 22
 private val dotenv = dotenv()
 
 fun main() {
