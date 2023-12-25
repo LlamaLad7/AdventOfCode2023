@@ -16,8 +16,10 @@ dependencies {
     implementation("com.github.jkcclemens:khttp:0.1.0")
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.0")
     implementation("com.github.aballano:mnemonik:2.1.1")
+    implementation(project.files("z3/com.microsoft.z3.jar"))
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
+    compilerOptions.freeCompilerArgs.add("-Xcontext-receivers")
 }

@@ -1,13 +1,15 @@
 package day24
 
+import com.microsoft.z3.Context
 import getInput
+import z3.*
 import java.math.BigInteger
 
 fun main() {
     day24part1(getInput(24, true, 1), true)
     day24part1(getInput(24, false, 1), false)
-//    day24part2(getInput(24, true, 2))
-//    day24part2(getInput(24, false, 2))
+    day24part2(getInput(24, true, 2))
+    day24part2(getInput(24, false, 2))
 }
 
 private fun day24part1(lines: List<String>, test: Boolean) {
@@ -50,7 +52,29 @@ private fun day24part1(lines: List<String>, test: Boolean) {
 }
 
 private fun day24part2(lines: List<String>) {
-    // See day24p2.py
+    val stones = lines.parse { it.toLong() }
+    val z3 = Context(
+        mapOf(
+            "model" to "true"
+        )
+    )
+    with(z3) {
+        val solver = mkSolver()
+        val (x, y, z) = mkInts("x", "y", "z")
+        val (u, v, w) = mkInts("u", "v", "w")
+        val t = Array(stones.size) { mkIntConst("t$it") }
+        for ((i, stone) in stones.withIndex()) {
+            val (pos, speed) = stone
+            val (xi, yi, zi) = pos
+            val (ui, vi, wi) = speed
+            solver.add(t[i] * u + x eq t[i] * ui + xi)
+            solver.add(t[i] * v + y eq t[i] * vi + yi)
+            solver.add(t[i] * w + z eq t[i] * wi + zi)
+        }
+        println(solver.check())
+        val model = solver.model
+        println(model[x] + model[y] + model[z])
+    }
 }
 
 private inline fun <T> List<String>.parse(transform: (String) -> T) = map { line ->
