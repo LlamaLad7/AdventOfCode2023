@@ -17,6 +17,7 @@ dependencies {
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.0")
     implementation("com.github.aballano:mnemonik:2.1.1")
     implementation(project.files("z3/com.microsoft.z3.jar"))
+    implementation("guru.nidi:graphviz-kotlin:0.18.1")
 }
 
 tasks.withType<KotlinCompile> {
